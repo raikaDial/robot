@@ -17,84 +17,6 @@ app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
 });
 
-
-
-// When someone has connected to me...
-io.sockets.on('connection', function (socket) {
-  // Send out a message (only to the one who connected)
-  socket.emit('robot connected', { data: 'Connected' });
-
-  // When I've received 'robot command' message from this connection...
-  socket.on('robot command', function (data) {
-    console.log(data);
-    var command = data.command;
-    if (command == 'red') {
-    	// Pin 13 has an LED connected on most Arduino boards.
-		// give it a name:
-		var red_led = new five.Led({
-				pin: 7
-		});
-		var blue_led = new five.Led({
-				pin: 5
-		});
-		var green_led = new five.Led({
-				pin: 6
-		});
-    	red_led.on();
-    	blue_led.off();
-    	green_led.off();
-    }
-    else if (command == 'blue') {
-    	// Pin 13 has an LED connected on most Arduino boards.
-		// give it a name:
-		var red_led = new five.Led({
-				pin: 7
-		});
-		var blue_led = new five.Led({
-				pin: 5
-		});
-		var green_led = new five.Led({
-				pin: 6
-		});
-    	red_led.off();
-    	blue_led.on();
-    	green_led.off();
-    }
-    else if (command == 'green') {
-    	// Pin 13 has an LED connected on most Arduino boards.
-		// give it a name:
-		var red_led = new five.Led({
-				pin: 7
-		});
-		var blue_led = new five.Led({
-				pin: 5
-		});
-		var green_led = new five.Led({
-				pin: 6
-		});
-    	red_led.off();
-    	blue_led.off();
-    	green_led.on();
-    }
-    else if (command == 'off') {
-    	// Pin 13 has an LED connected on most Arduino boards.
-		// give it a name:
-		var red_led = new five.Led({
-				pin: 7
-		});
-		var blue_led = new five.Led({
-				pin: 5
-		});
-		var green_led = new five.Led({
-				pin: 6
-		});
-    	red_led.off();
-    	blue_led.off();
-    	green_led.off();
-    }
-
-  });
-});
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 var five = require("johnny-five")
 // Initialize connection to Arduino (will crash if none is attached)
@@ -103,21 +25,67 @@ board = new five.Board();
 // When the connection is ready...
 board.on("ready", function() {
 
-	/*var blue_led = new five.Led({
+    // Pin 13 has an LED connected on most Arduino boards.
+	// give it a name:
+	var red_led = new five.Led({
+			pin: 7
+	});
+	var blue_led = new five.Led({
 			pin: 5
 	});
 	var green_led = new five.Led({
 			pin: 6
 	});
-	var red_led = new five.Led({
-			pin: 7
-	});
+	// When someone has connected to me...
+	io.sockets.on('connection', function (socket) {
+	  // Send out a message (only to the one who connected)
+	  socket.emit('robot connected', { data: 'Connected' });
 
-	this.repl.inject({
-		blue: function() {
-			blue_led.on();
-			green_led.off();
-			red_led.off();
-		}
-	});*/
+	  // When I've received 'robot command' message from this connection...
+	  socket.on('robot command', function (data) {
+	    console.log(data);
+	    var command = data.command;
+	    if (command == 'red') {
+	    	red_led.on();
+	    	blue_led.off();
+	    	green_led.off();
+	    }
+	    else if (command == 'blue') {
+	    	red_led.off();
+	    	blue_led.on();
+	    	green_led.off();
+	    }
+	    else if (command == 'green') {
+	    	red_led.off();
+	    	blue_led.off();
+	    	green_led.on();
+	    }
+	    else if (command == 'yellow') {
+	    	red_led.on();
+	    	blue_led.off();
+	    	green_led.on();
+	    }
+	    else if (command == 'cyan') {
+	    	red_led.off();
+	    	blue_led.on();
+	    	green_led.on();
+	    }
+	    else if (command == 'purple') {
+	    	red_led.on();
+	    	blue_led.on();
+	    	green_led.off();
+	    }
+	    else if (command == 'white') {
+	    	red_led.on();
+	    	blue_led.on();
+	    	green_led.on();
+	    }
+	    else if (command == 'off') {
+	    	red_led.off();
+	    	blue_led.off();
+	    	green_led.off();
+	    }
+
+	  });
+	});
 });

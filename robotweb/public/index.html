@@ -15,10 +15,16 @@
 
 <body style="margin: 0;">
 
-LED Control: 
+LED Control:<br> 
 <button type="button" id="red">Red</button>
 <button type="button" id="blue">Blue</button>
 <button type="button" id="green">Green</button>
+<br>
+<button type="button" id="yellow">Yellow</button>
+<button type="button" id="cyan">Cyan</button>
+<button type="button" id="purple">Purple</button>
+<br>
+<button type="button" id="white">White</button>
 <button type="button" id="off">Off</button>
 
 
@@ -45,6 +51,22 @@ LED Control:
     $('#green').click(function() {
     	console.log("Button Clicked")
       	socket.emit('robot command', { command: 'green' });
+    });
+    $('#yellow').click(function() {
+      console.log("Button Clicked")
+        socket.emit('robot command', { command: 'yellow' });
+    });
+    $('#cyan').click(function() {
+      console.log("Button Clicked")
+        socket.emit('robot command', { command: 'cyan' });
+    });
+    $('#purple').click(function() {
+      console.log("Button Clicked")
+        socket.emit('robot command', { command: 'purple' });
+    });
+    $('#white').click(function() {
+      console.log("Button Clicked")
+        socket.emit('robot command', { command: 'white' });
     });
     $('#off').click(function() {
     	console.log("Button Clicked")
