@@ -18,7 +18,7 @@ app.get('/', function (req, res) {
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-var five = require("johnny-five")
+var five = require("johnny-five");
 // Initialize connection to Arduino (will crash if none is attached)
 board = new five.Board();
 	
@@ -36,6 +36,17 @@ board.on("ready", function() {
 	var green_led = new five.Led({
 			pin: 6
 	});
+
+	var motor_front = new five.Servo({
+			pin: 8,
+			startAt: 90
+	});
+	var motor_rear = new five.Servo({
+			pin: 9,
+			startAt: 90
+	});
+
+
 	// When someone has connected to me...
 	io.sockets.on('connection', function (socket) {
 	  // Send out a message (only to the one who connected)
@@ -85,6 +96,28 @@ board.on("ready", function() {
 	    	blue_led.off();
 	    	green_led.off();
 	    }
+
+
+	    else if (command == 'forward') {
+	    	motor_rear.to(100);
+	    }
+	    else if(command == 'left'){
+	    	motor_front.to(120);
+	    }
+	    else if(command == 'center'){
+	    	motor_front.to(90);
+	    }
+	    else if(command == 'right'){
+	    	motor_front.to(60);
+	    }
+	    else if(command == 'backward'){
+	    	motor_rear.to(80);
+	    }
+	    else if (command == 'stop') {
+	    	motor_front.to(90);
+	    	motor_rear.to(90);
+	    }
+
 
 	  });
 	});

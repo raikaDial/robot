@@ -27,6 +27,16 @@ LED Control:<br>
 <button type="button" id="white">White</button>
 <button type="button" id="off">Off</button>
 
+<br>
+<br>
+Robot Control:<br>
+<button type="button" id="forward">Forward</button><br>
+<button type="button" id="left">Left</button>
+<button type="button" id="center">Center</button>
+<button type="button" id="right">Right</button><br>
+<button type="button" id="backward">Backward</button><br>
+<button type="button" id="stop">Stop</button>
+
 
 <script>
   $(document).ready(function() {
@@ -36,10 +46,10 @@ LED Control:<br>
     socket.on('robot connected', function (data) {
       console.log(data);
       // Send out a message to the server
-      socket.emit('robot command', { command: 'nothing' });
+      socket.emit('robot command', { command: 'stop' });
     });
 
-    // When the html buttons are clicked...
+    // Control LED Color
     $('#red').click(function() {
     	console.log("Button Clicked")
       socket.emit('robot command', { command: 'red' });
@@ -71,6 +81,32 @@ LED Control:<br>
     $('#off').click(function() {
     	console.log("Button Clicked")
       	socket.emit('robot command', { command: 'off' });
+    });
+
+    // Drive Robot
+    $('#forward').click(function() {
+      console.log("Button Clicked")
+        socket.emit('robot command', { command: 'forward' });
+    });
+    $('#left').click(function() {
+      console.log("Button Clicked")
+        socket.emit('robot command', { command: 'left' });
+    });
+    $('#center').click(function() {
+      console.log("Button Clicked")
+        socket.emit('robot command', { command: 'center' });
+    });
+    $('#stop').click(function() {
+      console.log("Button Clicked")
+        socket.emit('robot command', { command: 'stop' });
+    });
+    $('#right').click(function() {
+      console.log("Button Clicked")
+        socket.emit('robot command', { command: 'right' });
+    });
+    $('#backward').click(function() {
+      console.log("Button Clicked")
+        socket.emit('robot command', { command: 'backward' });
     });
   });
 </script>
