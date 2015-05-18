@@ -52,7 +52,7 @@ io.sockets.on('connection', function (socket) {
 		    case 'forward':
 		    	packet[0] = 114; // Byte code for robot control ( 'r' in ASCII )
 		    	packet[1] = 102; // f in ASCII
-		    	packet_[2] = 0;
+		    	packet[2] = 0;
 		    	packet[3] = 0;
 		   		break;
 		    case 'left':
