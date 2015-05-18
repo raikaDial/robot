@@ -1,4 +1,5 @@
-// Base code from http://blog.derivatived.com/posts/Control-Your-Robot-With-Node.js-Raspberry-PI-and-Arduino/
+// Basic framework for setting up express and web sockets from 
+//http://blog.derivatived.com/posts/Control-Your-Robot-With-Node.js-Raspberry-PI-and-Arduino/
 // Modified by Ryker Dial May 2015
 
 // Initialize express and server
@@ -29,6 +30,9 @@ var sp = new SerialPort(portName, {
 
 console.log( 'Arduino connected on port: ' + portName );
 
+// Drive power for robot
+var robot_drive_power = 14;
+
 // When someone has connected to me...
 io.sockets.on('connection', function (socket) {
 	// Send out a message (only to the one who connected)
@@ -52,38 +56,42 @@ io.sockets.on('connection', function (socket) {
 		    case 'forward':
 		    	packet[0] = 114; // Byte code for robot control ( 'r' in ASCII )
 		    	packet[1] = 102; // f in ASCII
-		    	packet[2] = 0;
+		    	packet[2] = robot_drive_power;
 		    	packet[3] = 0;
 		   		break;
 		    case 'left':
 		    	packet[0] = 114; // Byte code for robot control ( 'r' in ASCII )
 		    	packet[1] = 108; // l in ASCII
-		    	packet[2] = 0;
+		    	packet[2] = robot_drive_power;
 		    	packet[3] = 0;
 		   		break;
 		    case 'center':
 		    	packet[0] = 114; // Byte code for robot control ( 'r' in ASCII )
 		    	packet[1] = 99; // c in ASCII
-		    	packet[2] = 0;
+		    	packet[2] = robot_drive_power;
 		    	packet[3] = 0;
 				break;
 		    case 'right':
 		    	packet[0] = 114; // Byte code for robot control ( 'r' in ASCII )
 		    	packet[1] = 114; // r in ASCII
-		    	packet[2] = 0;
+		    	packet[2] = robot_drive_power;
 		    	packet[3] = 0;
 		    	break;
 		    case 'backward':
 		    	packet[0] = 114; // Byte code for robot control ( 'r' in ASCII )
 		    	packet[1] = 98; // b in ASCII
-		    	packet[2] = 0;
+		    	packet[2] = robot_drive_power;
 		    	packet[3] = 0;
 				break;
 		    case 'stop':
 		    	packet[0] = 114; // Byte code for robot control ( 'r' in ASCII )
 		    	packet[1] = 115; // s in ASCII
-		    	packet[2] = 0;
+		    	packet[2] = robot_drive_power;
 		    	packet[3] = 0;
+				break;
+		    case 'set_power':
+		    	robot_drive_power = data.power;
+		    	console.log('robot_drive_power: ' + robot_drive_power);
 				break;
 
 			case 'LED':
@@ -92,75 +100,50 @@ io.sockets.on('connection', function (socket) {
 				packet[2] = data.green;
 				packet[3] = data.blue;
 			break;
-	    	/*// LED commands (prefixed with 'l')
-	    	case 'red':
-	    		//myPort.write('lr');
-	    		break;
-		    case 'blue':
-		    	//myPort.write('lb');
-		    	break;
-		    case 'green':
-		    	//myPort.write('lg');
-		    	break;
-		    case 'yellow':
-		    	//myPort.write('ly');
-		   		break;
-		    case 'cyan':
-		    	//myPort.write('lc');
-		    	break;
-		    case 'purple':
-		    	///myPort.write('lp');
-		    	break;
-		    case 'white':
-		    	//myPort.write('lw');
-		   		break;
-		    case 'off':
-		    	//myPort.write('lo');
-		    	break;
-			*/
-	    	// Music commands (prefixed with 'm')
-	    	case 'a6':
-		    	packet[0] = 109; // Byte code for music control ( 'm' in ASCII )
+	 
+	    	/*// Music commands (prefixed with 'h')
+	    	case 'music_a6':
+		    	packet[0] = 104; // Byte code for music control ( 'h' in ASCII )
 		    	packet[1] = 97; // a in ASCII
 		    	packet[2] = 0;
 		    	packet[3] = 0;
 	    		break;
-		    case 'b6':
-		    	packet[0] = 109; // Byte code for music control ( 'm' in ASCII )
+		    case 'music_b6':
+		    	packet[0] = 104; // Byte code for music control ( 'm' in ASCII )
 		    	packet[1] = 98; // b in ASCII
 		    	packet[2] = 0;
 		    	packet[3] = 0;
 	    		break;
-		    case 'c6':
-		    	packet[0] = 109; // Byte code for music control ( 'm' in ASCII )
+		    case 'music_c6':
+		    	packet[0] = 104; // Byte code for music control ( 'm' in ASCII )
 		    	packet[1] = 99; // c in ASCII
 		    	packet[2] = 0;
 		    	packet[3] = 0;
 	    		break;
-		    case 'd6':
-		    	packet[0] = 109; // Byte code for music control ( 'm' in ASCII )
+		    case 'music_d6':
+		    	packet[0] = 104; // Byte code for music control ( 'm' in ASCII )
 		    	packet[1] = 100; // d in ASCII
 		    	packet[2] = 0;
 		    	packet[3] = 0;
 	    		break;
-		    case 'e6':
-		    	packet[0] = 109; // Byte code for music control ( 'm' in ASCII )
+		    case 'music_e6':
+		    	packet[0] = 104; // Byte code for music control ( 'm' in ASCII )
 		    	packet[1] = 101; // e in ASCII
 		    	packet[2] = 0;
 		    	packet[3] = 0;
 	    		break;
-		    case 'f6':
-		    	packet[0] = 109; // Byte code for music control ( 'm' in ASCII )
+		    case 'music_f6':
+		    	packet[0] = 104; // Byte code for music control ( 'm' in ASCII )
 		    	packet[1] = 102; // f in ASCII
 		    	packet[2] = 0;
 		    	packet[3] = 0;
 	    		break;
-		    case 'g6':
-		    	packet[0] = 109; // Byte code for music control ( 'm' in ASCII )
+		    case 'music_g6':
+		    	packet[0] = 104; // Byte code for music control ( 'm' in ASCII )
 		    	packet[1] = 103; // g in ASCII
 		    	packet[2] = 0;
 		    	packet[3] = 0;
-	    		break;
+	    		break;*/
 
 		    default:
 				for( i = 0; i < PACKET_SIZE; i++ ) {
@@ -169,10 +152,6 @@ io.sockets.on('connection', function (socket) {
 				break;
 		}
 
-		/*console.log('Building Packet');
-		for( i = 0; i < PACKET_SIZE; i++) {
-			packet[0] = packet[0] | (packet_chunk[i] << 8*i);
-		}*/
 		// Send packet over serial
 		console.log('Sending Packet');
 		sp.write( packet );
