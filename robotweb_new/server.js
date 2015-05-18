@@ -18,174 +18,168 @@ app.get('/', function (req, res) {
 });
 
 var serialport = require('serialport'),// include the library
-   SerialPort = serialport.SerialPort, // make a local instance of it
+   SerialPort = serialport.SerialPort,//, // make a local instance of it
    // get port name from the command line:
-   portName = '/dev/ttyACM0';
+   portName = process.argv[2];
 
-var myPort = new SerialPort(portName, {
+var sp = new SerialPort(portName, {
    baudRate: 9600
-   // look for return and newline at the end of each data packet:
-   //parser: serialport.parsers.readline("\r\n")
  });
+
 
 console.log( 'Arduino connected on port: ' + portName );
 
-	// When someone has connected to me...
-	io.sockets.on('connection', function (socket) {
-	  // Send out a message (only to the one who connected)
-	  socket.emit('robot connected', { data: 'Connected' });
+// When someone has connected to me...
+io.sockets.on('connection', function (socket) {
+	// Send out a message (only to the one who connected)
+	socket.emit('robot connected', { data: 'Connected' });
 
-	  // When I've received 'robot command' message from this connection...
-	  socket.on('robot command', function (data) {
+	// When I've received 'robot command' message from this connection...
+	socket.on('robot command', function (data) {
 	    console.log(data);
 	    var command = data.command;
-	    if (command == 'red') {
-	    	myPort.write('lr');
-	    }
-	    else if (command == 'blue') {
-	    	myPort.write('lb');
-	    }
-	    else if (command == 'green') {
-	    	myPort.write('lg');
-	    }
-	    else if (command == 'yellow') {
-	    	myPort.write('ly');
-	    }
-	    else if (command == 'cyan') {
-	    	myPort.write('lc');
-	    }
-	    else if (command == 'purple') {
-	    	myPort.write('lp');
-	    }
-	    else if (command == 'white') {
-	    	myPort.write('lw');
-	    }
-	    else if (command == 'off') {
-	    	myPort.write('lo');
-	    }
-	    else if (command == 'forward') {
-	    	myPort.write('rf');
-	    }
-	    else if(command == 'left'){
-	    	myPort.write('rl');
-	    }
-	    else if(command == 'center'){
-	    	myPort.write('rc');
-	    }
-	    else if(command == 'right'){
-	    	myPort.write('rr');
-	    }
-	    else if(command == 'backward'){
-	    	myPort.write('rb');
-	    }
-	    else if (command == 'stop') {
-	    	myPort.write('rs');
-	    }
 
-	  });
+	    // Packet provides uniform format for sending commands to arduino
+	    // 4-byte packets, MSB is control code, other 3 bytes are value
+	    var PACKET_SIZE = 4;
+	    var packet = new Uint8Array( PACKET_SIZE );
+
+	    // Sends commands to arduino over serial connection
+	    // Uses two byte code
+	    switch( command ) {
+
+		    // Robot commands (prefixed with 'r')
+		    case 'forward':
+		    	packet[0] = 114; // Byte code for robot control ( 'r' in ASCII )
+		    	packet[1] = 102; // f in ASCII
+		    	packet_[2] = 0;
+		    	packet[3] = 0;
+		   		break;
+		    case 'left':
+		    	packet[0] = 114; // Byte code for robot control ( 'r' in ASCII )
+		    	packet[1] = 108; // l in ASCII
+		    	packet[2] = 0;
+		    	packet[3] = 0;
+		   		break;
+		    case 'center':
+		    	packet[0] = 114; // Byte code for robot control ( 'r' in ASCII )
+		    	packet[1] = 99; // c in ASCII
+		    	packet[2] = 0;
+		    	packet[3] = 0;
+				break;
+		    case 'right':
+		    	packetk[0] = 114; // Byte code for robot control ( 'r' in ASCII )
+		    	packetk[1] = 114; // r in ASCII
+		    	packet[2] = 0;
+		    	packet[3] = 0;
+		    	break;
+		    case 'backward':
+		    	packet[0] = 114; // Byte code for robot control ( 'r' in ASCII )
+		    	packet[1] = 98; // b in ASCII
+		    	packet[2] = 0;
+		    	packet[3] = 0;
+				break;
+		    case 'stop':
+		    	packet[0] = 114; // Byte code for robot control ( 'r' in ASCII )
+		    	packet[1] = 115; // s in ASCII
+		    	packet[2] = 0;
+		    	packet[3] = 0;
+				break;
+
+			case 'LED':
+				packet[0] = 108;  // Byte code for LED control ( 'l' in ASCII )
+				packet[1] = data.red;
+				packet[2] = data.green;
+				packet[3] = data.blue;
+			break;
+	    	/*// LED commands (prefixed with 'l')
+	    	case 'red':
+	    		//myPort.write('lr');
+	    		break;
+		    case 'blue':
+		    	//myPort.write('lb');
+		    	break;
+		    case 'green':
+		    	//myPort.write('lg');
+		    	break;
+		    case 'yellow':
+		    	//myPort.write('ly');
+		   		break;
+		    case 'cyan':
+		    	//myPort.write('lc');
+		    	break;
+		    case 'purple':
+		    	///myPort.write('lp');
+		    	break;
+		    case 'white':
+		    	//myPort.write('lw');
+		   		break;
+		    case 'off':
+		    	//myPort.write('lo');
+		    	break;
+			*/
+	    	// Music commands (prefixed with 'm')
+	    	case 'a6':
+		    	packet[0] = 109; // Byte code for music control ( 'm' in ASCII )
+		    	packet[1] = 97; // a in ASCII
+		    	packet[2] = 0;
+		    	packet[3] = 0;
+	    		break;
+		    case 'b6':
+		    	packet[0] = 109; // Byte code for music control ( 'm' in ASCII )
+		    	packet[1] = 98; // b in ASCII
+		    	packet[2] = 0;
+		    	packet[3] = 0;
+	    		break;
+		    case 'c6':
+		    	packet[0] = 109; // Byte code for music control ( 'm' in ASCII )
+		    	packet[1] = 99; // c in ASCII
+		    	packet[2] = 0;
+		    	packet[3] = 0;
+	    		break;
+		    case 'd6':
+		    	packet[0] = 109; // Byte code for music control ( 'm' in ASCII )
+		    	packet[1] = 100; // d in ASCII
+		    	packet[2] = 0;
+		    	packet[3] = 0;
+	    		break;
+		    case 'e6':
+		    	packet[0] = 109; // Byte code for music control ( 'm' in ASCII )
+		    	packet[1] = 101; // e in ASCII
+		    	packet[2] = 0;
+		    	packet[3] = 0;
+	    		break;
+		    case 'f6':
+		    	packet[0] = 109; // Byte code for music control ( 'm' in ASCII )
+		    	packet[1] = 102; // f in ASCII
+		    	packet[2] = 0;
+		    	packet[3] = 0;
+	    		break;
+		    case 'g6':
+		    	packet[0] = 109; // Byte code for music control ( 'm' in ASCII )
+		    	packet[1] = 103; // g in ASCII
+		    	packet[2] = 0;
+		    	packet[3] = 0;
+	    		break;
+
+		    default:
+				for( i = 0; i < PACKET_SIZE; i++ ) {
+					packet[i] = 0;
+				}
+				break;
+		}
+
+		/*console.log('Building Packet');
+		for( i = 0; i < PACKET_SIZE; i++) {
+			packet[0] = packet[0] | (packet_chunk[i] << 8*i);
+		}*/
+		// Send packet over serial
+		console.log('Sending Packet');
+		sp.write( packet );
+		for( i = 0; i < PACKET_SIZE; i++ ) {
+			console.log( packet[i] );
+			//sp.write( packet[i] );
+		}
+		console.log('Packet Sent');
 	});
-/*////////////////////////////////////////////////////////////////////////////////////////////////////
-var five = require("johnny-five");
-// Initialize connection to Arduino (will crash if none is attached)
-board = new five.Board();
-	
-// When the connection is ready...
-board.on("ready", function() {
-
-    // Pin 13 has an LED connected on most Arduino boards.
-	// give it a name:
-	var red_led = new five.Led({
-			pin: 7
-	});
-	var blue_led = new five.Led({
-			pin: 5
-	});
-	var green_led = new five.Led({
-			pin: 6
-	});
-
-	var motor_front = new five.Servo({
-			pin: 8,
-			startAt: 90
-	});
-	var motor_rear = new five.Servo({
-			pin: 9,
-			startAt: 90
-	});
-
-
-	// When someone has connected to me...
-	io.sockets.on('connection', function (socket) {
-	  // Send out a message (only to the one who connected)
-	  socket.emit('robot connected', { data: 'Connected' });
-
-	  // When I've received 'robot command' message from this connection...
-	  socket.on('robot command', function (data) {
-	    console.log(data);
-	    var command = data.command;
-	    if (command == 'red') {
-	    	red_led.on();
-	    	blue_led.off();
-	    	green_led.off();
-	    }
-	    else if (command == 'blue') {
-	    	red_led.off();
-	    	blue_led.on();
-	    	green_led.off();
-	    }
-	    else if (command == 'green') {
-	    	red_led.off();
-	    	blue_led.off();
-	    	green_led.on();
-	    }
-	    else if (command == 'yellow') {
-	    	red_led.on();
-	    	blue_led.off();
-	    	green_led.on();
-	    }
-	    else if (command == 'cyan') {
-	    	red_led.off();
-	    	blue_led.on();
-	    	green_led.on();
-	    }
-	    else if (command == 'purple') {
-	    	red_led.on();
-	    	blue_led.on();
-	    	green_led.off();
-	    }
-	    else if (command == 'white') {
-	    	red_led.on();
-	    	blue_led.on();
-	    	green_led.on();
-	    }
-	    else if (command == 'off') {
-	    	red_led.off();
-	    	blue_led.off();
-	    	green_led.off();
-	    }
-
-
-	    else if (command == 'forward') {
-	    	motor_rear.to(95);
-	    }
-	    else if(command == 'left'){
-	    	motor_front.to(120);
-	    }
-	    else if(command == 'center'){
-	    	motor_front.to(90);
-	    }
-	    else if(command == 'right'){
-	    	motor_front.to(60);
-	    }
-	    else if(command == 'backward'){
-	    	motor_rear.to(85);
-	    }
-	    else if (command == 'stop') {
-	    	motor_front.to(90);
-	    	motor_rear.to(90);
-	    }
-
-
-	  });
-	});
-});*/
+});

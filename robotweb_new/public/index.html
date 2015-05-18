@@ -1,7 +1,7 @@
 <!-- Base code from http://blog.derivatived.com/posts/Control-Your-Robot-With-Node.js-Raspberry-PI-and-Arduino/
       Modified by Ryker Dial May 2015-->
 
-<!<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
 	<title>Remote Control Arduino Test</title>
@@ -9,33 +9,54 @@
 
 	<!--Using JQuery for button events-->
 	<script src="js/jquery.min.js"></script>
+
+  <!-- Use Spectrum to control LED color -->
+  <script src='js/spectrum.js'></script>
+  <link rel='stylesheet' href='css/spectrum.css' />
+
 	<!--Socket.io library-->
 	<script src="/socket.io/socket.io.js"></script>
 </head>
 
 <body style="margin: 0;">
 
-LED Control:<br> 
-<button type="button" id="red">Red</button>
-<button type="button" id="blue">Blue</button>
-<button type="button" id="green">Green</button>
-<br>
-<button type="button" id="yellow">Yellow</button>
-<button type="button" id="cyan">Cyan</button>
-<button type="button" id="purple">Purple</button>
-<br>
-<button type="button" id="white">White</button>
-<button type="button" id="off">Off</button>
+  Robot Control:<br>
+    <button type="button" id="forward">Forward</button><br>
+    <button type="button" id="left">Left</button>
+    <button type="button" id="center">Center</button>
+    <button type="button" id="right">Right</button><br>
+    <button type="button" id="backward">Backward</button><br>
+    <button type="button" id="stop">Stop</button>
+  <br>
+  <br>
+  LED Control:<br> 
+    <input type='text' class="basic" />
+    <em id='basic-log'></em>
+    <!--<button type="button" id="red">Red</button>
+    <button type="button" id="blue">Blue</button>
+    <button type="button" id="green">Green</button>
+    <br>
+    <button type="button" id="yellow">Yellow</button>
+    <button type="button" id="cyan">Cyan</button>
+    <button type="button" id="purple">Purple</button>
+    <br>
+    <button type="button" id="white">White</button>-->
+    <button type="button" id="off">Off</button>
+  <br>
+  <br>
+  Music Control:<br>
+    <button type="button" id="c6">C6</button>
+    <button type="button" id="d6">D6</button>
+    <button type="button" id="e6">E6</button>
+    <button type="button" id="f6">F6</button>
+    <button type="button" id="g6">G6</button>
+    <button type="button" id="a6">A6</button>
+    <button type="button" id="b6">B6</button>
 
-<br>
-<br>
-Robot Control:<br>
-<button type="button" id="forward">Forward</button><br>
-<button type="button" id="left">Left</button>
-<button type="button" id="center">Center</button>
-<button type="button" id="right">Right</button><br>
-<button type="button" id="backward">Backward</button><br>
-<button type="button" id="stop">Stop</button>
+    <script>
+
+    </script>
+
 
 
 <script>
@@ -46,11 +67,37 @@ Robot Control:<br>
     socket.on('robot connected', function (data) {
       console.log(data);
       // Send out a message to the server
-      socket.emit('robot command', { command: 'stop' });
+      socket.emit('robot command', { command: 'nothing' });
+    });
+
+    // Drive Robot
+    $('#forward').click(function() {
+      console.log("Button Clicked");
+        socket.emit('robot command', { command: 'forward' });
+    });
+    $('#left').click(function() {
+      console.log("Button Clicked");
+        socket.emit('robot command', { command: 'left' });
+    });
+    $('#center').click(function() {
+      console.log("Button Clicked");
+        socket.emit('robot command', { command: 'center' });
+    });
+    $('#stop').click(function() {
+      console.log("Button Clicked");
+        socket.emit('robot command', { command: 'stop' });
+    });
+    $('#right').click(function() {
+      console.log("Button Clicked");
+        socket.emit('robot command', { command: 'right' });
+    });
+    $('#backward').click(function() {
+      console.log("Button Clicked");
+        socket.emit('robot command', { command: 'backward' });
     });
 
     // Control LED Color
-    $('#red').click(function() {
+    /*$('#red').click(function() {
     	console.log("Button Clicked")
       socket.emit('robot command', { command: 'red' });
     });
@@ -77,37 +124,62 @@ Robot Control:<br>
     $('#white').click(function() {
       console.log("Button Clicked")
         socket.emit('robot command', { command: 'white' });
+    });*/
+
+    // Control LED Color
+    $(".basic").spectrum({
+    color: "#f00",
+      change: function(color) {
+          $("#basic-log").text("change called: " + color.toHexString());
+          var hex = parseInt( (color.toHexString()).replace(/^#/, ''), 16); 
+          socket.emit('robot command', { 
+            command: 'LED', 
+            red: color._r, 
+            green: color._g,
+            blue: color._b
+          });
+      }
     });
     $('#off').click(function() {
-    	console.log("Button Clicked")
-      	socket.emit('robot command', { command: 'off' });
+    	console.log("Button Clicked");
+          socket.emit('robot command', { 
+            command: 'LED', 
+            red: 0, 
+            green: 0,
+            blue: 0
+          });
     });
 
-    // Drive Robot
-    $('#forward').click(function() {
-      console.log("Button Clicked")
-        socket.emit('robot command', { command: 'forward' });
+    //Control Music
+    $('#c6').click(function() {
+      console.log("Button Clicked");
+      socket.emit('robot command', { command: 'c6' });
     });
-    $('#left').click(function() {
-      console.log("Button Clicked")
-        socket.emit('robot command', { command: 'left' });
+    $('#d6').click(function() {
+      console.log("Button Clicked");
+      socket.emit('robot command', { command: 'd6' });
     });
-    $('#center').click(function() {
-      console.log("Button Clicked")
-        socket.emit('robot command', { command: 'center' });
+    $('#e6').click(function() {
+      console.log("Button Clicked");
+      socket.emit('robot command', { command: 'e6' });
     });
-    $('#stop').click(function() {
-      console.log("Button Clicked")
-        socket.emit('robot command', { command: 'stop' });
+    $('#f6').click(function() {
+      console.log("Button Clicked");
+      socket.emit('robot command', { command: 'f6' });
     });
-    $('#right').click(function() {
-      console.log("Button Clicked")
-        socket.emit('robot command', { command: 'right' });
+    $('#g6').click(function() {
+      console.log("Button Clicked");
+        socket.emit('robot command', { command: 'g6' });
     });
-    $('#backward').click(function() {
-      console.log("Button Clicked")
-        socket.emit('robot command', { command: 'backward' });
+    $('#a6').click(function() {
+      console.log("Button Clicked");
+      socket.emit('robot command', { command: 'a6' });
     });
+    $('#b6').click(function() {
+      console.log("Button Clicked");
+      socket.emit('robot command', { command: 'b6' });
+    });
+
   });
 </script>
 </body>
