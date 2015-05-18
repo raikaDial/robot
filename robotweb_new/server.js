@@ -68,8 +68,8 @@ io.sockets.on('connection', function (socket) {
 		    	packet[3] = 0;
 				break;
 		    case 'right':
-		    	packetk[0] = 114; // Byte code for robot control ( 'r' in ASCII )
-		    	packetk[1] = 114; // r in ASCII
+		    	packet[0] = 114; // Byte code for robot control ( 'r' in ASCII )
+		    	packet[1] = 114; // r in ASCII
 		    	packet[2] = 0;
 		    	packet[3] = 0;
 		    	break;
