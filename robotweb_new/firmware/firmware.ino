@@ -57,7 +57,7 @@ void loop()
             Serial1.write( RIGHT );
             break;
           case 'b':
-            Serial1.write( BACKWARD + RANGE + power );
+            Serial1.write( BACKWARD + RANGE - power );
             break;
           case 's':
             Serial1.write( STOP );
