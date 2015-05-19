@@ -1,25 +1,25 @@
-<!-- Ryker Dial May 2015-->
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 	<title>Robot Control</title>
 	<meta charset="utf-8">
+
   <link rel='stylesheet' href='css/style.css' />
 
+  <!-- Include JQuery for interface -->
 	<script src="js/jquery.min.js"></script>
 
   <!-- Use Spectrum to control LED color -->
   <script src='js/spectrum.js'></script>
   <link rel='stylesheet' href='css/spectrum.css' />
 
-	<!--Socket.io library-->
+	<!-- Use websockets to send user commands to server -->
 	<script src="/socket.io/socket.io.js"></script>
 </head>
 
 <body>
   <section>
-    <div id="one">
+    <div id="robot_control">
       <p align = "center">
       Robot Control:<br><br>
         <button type="button" id="forward">Forward</button><br>
@@ -31,16 +31,15 @@
     </p>
     <br>
       Robot Drive Power:<br>
-        <input type="number" id="robot_drive_power" min=0 max=64>
+        <input type="number" id="robot_drive_power" min=0 max=63>
         <button type="button" id="set_drive_power">Set</button> 
         <br>Resend drive command for changes to take effect.<br>
     <br>
     LED Control:<br> 
       <input type='text' class="basic" />
-      <em id='basic-log'></em>
       <button type="button" id="off">Off</button>
     </div>
-    <div id="two">
+    <div id="video">
       <iframe src="http://192.168.1.107:8081" width="640" height="480"></iframe>
     </div>
   </section>

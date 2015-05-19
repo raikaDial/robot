@@ -1,6 +1,7 @@
 body {
 	margin: 0;
 	padding: 0;
+    background-color: #b0e0e6;
 }
 
 section {
@@ -10,12 +11,12 @@ section {
     margin: auto;
     padding: 10px;
 }
-div#one {
+div#robot_control {
     width: 50%;
     height: 500px;
     float: left;
 }
-div#two {
+div#video {
     margin-left: 50%;
     height: 500px;
 }

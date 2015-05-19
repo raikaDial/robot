@@ -15,7 +15,7 @@ app.use(express.static(__dirname + '/public'));
 
 // Set index.html as the base file
 app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/index.html');
+  	res.sendfile(__dirname + '/index.html');
 });
 
 var serialport = require('serialport'),// include the library
@@ -24,7 +24,7 @@ var serialport = require('serialport'),// include the library
    portName = process.argv[2];
 
 var sp = new SerialPort(portName, {
-   baudRate: 9600
+   	baudRate: 9600
  });
 
 
@@ -100,50 +100,6 @@ io.sockets.on('connection', function (socket) {
 				packet[2] = data.green;
 				packet[3] = data.blue;
 			break;
-	 
-	    	/*// Music commands (prefixed with 'h')
-	    	case 'music_a6':
-		    	packet[0] = 104; // Byte code for music control ( 'h' in ASCII )
-		    	packet[1] = 97; // a in ASCII
-		    	packet[2] = 0;
-		    	packet[3] = 0;
-	    		break;
-		    case 'music_b6':
-		    	packet[0] = 104; // Byte code for music control ( 'm' in ASCII )
-		    	packet[1] = 98; // b in ASCII
-		    	packet[2] = 0;
-		    	packet[3] = 0;
-	    		break;
-		    case 'music_c6':
-		    	packet[0] = 104; // Byte code for music control ( 'm' in ASCII )
-		    	packet[1] = 99; // c in ASCII
-		    	packet[2] = 0;
-		    	packet[3] = 0;
-	    		break;
-		    case 'music_d6':
-		    	packet[0] = 104; // Byte code for music control ( 'm' in ASCII )
-		    	packet[1] = 100; // d in ASCII
-		    	packet[2] = 0;
-		    	packet[3] = 0;
-	    		break;
-		    case 'music_e6':
-		    	packet[0] = 104; // Byte code for music control ( 'm' in ASCII )
-		    	packet[1] = 101; // e in ASCII
-		    	packet[2] = 0;
-		    	packet[3] = 0;
-	    		break;
-		    case 'music_f6':
-		    	packet[0] = 104; // Byte code for music control ( 'm' in ASCII )
-		    	packet[1] = 102; // f in ASCII
-		    	packet[2] = 0;
-		    	packet[3] = 0;
-	    		break;
-		    case 'music_g6':
-		    	packet[0] = 104; // Byte code for music control ( 'm' in ASCII )
-		    	packet[1] = 103; // g in ASCII
-		    	packet[2] = 0;
-		    	packet[3] = 0;
-	    		break;*/
 
 		    default:
 				for( i = 0; i < PACKET_SIZE; i++ ) {
@@ -153,11 +109,10 @@ io.sockets.on('connection', function (socket) {
 		}
 
 		// Send packet over serial
-		console.log('Sending Packet');
+		console.log('Sending Packet. Contents:');
 		sp.write( packet );
 		for( i = 0; i < PACKET_SIZE; i++ ) {
 			console.log( packet[i] );
-			//sp.write( packet[i] );
 		}
 		console.log('Packet Sent');
 	});
