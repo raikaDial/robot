@@ -1,14 +1,22 @@
+header {
+    background-color: black;
+    color: white;
+    font-family: Georgia, serif;
+    text-align: center;
+    padding: 5px;
+}
+
 body {
 	margin: 0;
 	padding: 0;
-    background-color: #b0e0e6;
 }
 
 section {
     width: 100%;
     height: 500px;
-    background-color: #b0e0e6;
     margin: auto;
+    font-family: Georgia, serif;
+    background-color: #eeeeee;
     padding: 10px;
 }
 div#robot_control {
