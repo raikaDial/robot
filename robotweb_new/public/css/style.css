@@ -3,9 +3,20 @@ body {
 	padding: 0;
 }
 
-.center {
-	margin-left: auto;
-	margin-right: auto;
-	width: 70%;
-	background-color: #b0e0e6;
+section {
+    width: 100%;
+    height: 500px;
+    background-color: #b0e0e6;
+    margin: auto;
+    padding: 10px;
 }
+div#one {
+    width: 50%;
+    height: 500px;
+    float: left;
+}
+div#two {
+    margin-left: 50%;
+    height: 500px;
+}
+

@@ -18,40 +18,32 @@
 </head>
 
 <body>
-
-  <div class="center">
-    <p align = "center">
-    Robot Control:<br><br>
-      <button type="button" id="forward">Forward</button><br>
-      <button type="button" id="left">Left</button>
-      <button type="button" id="center">Center</button>
-      <button type="button" id="right">Right</button><br>
-      <button type="button" id="backward">Backward</button><br>
-      <button type="button" id="stop">Stop</button>
-  </p>
-  <br>
-
-    Robot Drive Power:<br>
-      <input type="number" id="robot_drive_power" min=0 max=64>
-      <button type="button" id="set_drive_power">Set</button> Resend drive command for changes to take effect.<br>
-  </div>
-  <br><br>
-  LED Control:<br> 
-    <input type='text' class="basic" />
-    <em id='basic-log'></em>
-    <button type="button" id="off">Off</button>
-  <!--<br>
-  <br>
-  Music Control:<br>
-    <button type="button" id="music_c6">C6</button>
-    <button type="button" id="music_d6">D6</button>
-    <button type="button" id="music_e6">E6</button>
-    <button type="button" id="music_f6">F6</button>
-    <button type="button" id="music_g6">G6</button>
-    <button type="button" id="music_a6">A6</button>
-    <button type="button" id="music_b6">B6</button>-->
-
+  <section>
+    <div id="one">
+      <p align = "center">
+      Robot Control:<br><br>
+        <button type="button" id="forward">Forward</button><br>
+        <button type="button" id="left">Left</button>
+        <button type="button" id="center">Center</button>
+        <button type="button" id="right">Right</button><br>
+        <button type="button" id="backward">Backward</button><br>
+        <button type="button" id="stop">Stop</button>
+    </p>
+    <br>
+      Robot Drive Power:<br>
+        <input type="number" id="robot_drive_power" min=0 max=64>
+        <button type="button" id="set_drive_power">Set</button> 
+        <br>Resend drive command for changes to take effect.<br>
+    <br>
+    LED Control:<br> 
+      <input type='text' class="basic" />
+      <em id='basic-log'></em>
+      <button type="button" id="off">Off</button>
+    </div>
+    <div id="two">
+      <iframe src="http://192.168.1.107:8081" width="640" height="480"></iframe>
+    </div>
+  </section>
   <script src="js/interface.js"></script>
-
 </body>
 </html>
