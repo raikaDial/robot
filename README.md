@@ -16,8 +16,8 @@ Web controlled robot
 1. Install raspbian on raspberry pi. 
     *   In raspi-config, expand filesystem, enable raspberry pi camera module, and change the memory split to 256/256.
     *   Make sure your installation is up to date:
-            sudo apt-get update
-            sudo apt-get upgrade
+            'sudo apt-get update'
+            'sudo apt-get upgrade'
 2. Insert wireless dongle and connect to WIFI network.
     *   Use **hostname -I** to figure out the ip address of your raspberry pi and take note of it.
 3. Install Node.js. I ran into a number of issues installing node, but the following worked for me:
