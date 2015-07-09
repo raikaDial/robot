@@ -7,8 +7,8 @@ header {
 }
 
 body {
-	margin: 0;
-	padding: 0;
+	margin: 0px;
+	padding: 0px;
 }
 
 section {
@@ -28,4 +28,6 @@ div#video {
     margin-left: 50%;
     height: 500px;
 }
-
+.tab {
+    margin-left: 20%;
+}
