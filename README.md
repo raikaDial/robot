@@ -34,7 +34,7 @@ Web controlled robot
 7. Upload the firmware on your arduino mega:
     * Go to the directory robot/robotweb/firmware and upload firmware.ino to your arduino mega
 8. Install motion and the mmal extension (http://www.instructables.com/id/Raspberry-Pi-as-low-cost-HD-surveillance-camera/step7/Installing-the-motion-detection-software/):
-       `sudo apt-get install motion`    
+       `sudo apt-get install motion`  
        `cd /tmp`  
        `sudo apt-get install -y libjpeg62 libjpeg62-dev libavformat53 libavformat-dev libavcodec53 libavcodec-dev libavutil51 libavutil-dev libc6-dev zlib1g-dev libmysqlclient18 libmysqlclient-dev libpq5 libpq-dev`  
        `wget https://www.dropbox.com/s/xdfcxm5hu71s97d/motion-mmal.tar.gz`    
