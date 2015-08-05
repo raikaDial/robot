@@ -28,7 +28,7 @@ Web controlled robot
        `echo 'export PATH="$PATH:/opt/node/bin"' >> ~/.bashrc`  
        `source ~/.bashrc`  
        `npm install express serialport socket.io`  	
-6. Change IP addresses in source code:
+6. Change IP addresses in source code if you want to control robot over internet instead of local network (this method will require setting up port forwarding):
     * In robot/robotweb/public/index.html go to line 30 and change the iframe src to *<IP_of_your_RASPI>:8081*.
     * In robot/robotweb/public/js/interface.js go to line 3 and change the ip address to *<IP_of_your_RASPI>*.
 7. Upload the firmware on your arduino mega:
