@@ -1,6 +1,10 @@
 $(document).ready(function() {
-    // Connect to the node.js server. Change the IP address to the actual node server location.
-    var socket = io.connect('http://192.168.1.105');
+    // Connect to the node.js server. Gets server's local ip.
+    // Using this method robot can only be connected to on
+    // local network. 
+    var ip = location.host;
+    document.getElementById('video_iframe').src = 'http://' + ip + ":8081"; // Sets iframe source to get video
+    var socket = io.connect(ip); // Connects to server
     // Upon establishing a connection to the socket.io server...
     socket.on('robot connected', function (data) {
         console.log(data);
