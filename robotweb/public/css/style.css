@@ -19,7 +19,7 @@ section {
     background-color: #eeeeee;
     padding: 10px;
 }
-div#robot_control {
+/*div#robot_control {
     width: 50%;
     height: 500px;
     float: left;
@@ -27,7 +27,7 @@ div#robot_control {
 div#video {
     margin-left: 50%;
     height: 500px;
-}
+}*/
 .tab {
     margin-left: 20%;
 }
