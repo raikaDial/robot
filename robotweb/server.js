@@ -18,7 +18,7 @@ app.get('/', function (req, res) {
   	res.sendfile(__dirname + '/index.html');
 });
 
-/*var serialport = require('serialport'),// include the library
+var serialport = require('serialport'),// include the library
    SerialPort = serialport.SerialPort,//, // make a local instance of it
    // get port name from the command line:
    portName = process.argv[2];
@@ -28,7 +28,7 @@ var sp = new SerialPort(portName, {
  });
 
 
-console.log( 'Arduino connected on port: ' + portName );*/
+console.log( 'Arduino connected on port: ' + portName );
 
 // Drive power for robot
 var robot_drive_power = 14;
@@ -108,12 +108,12 @@ io.sockets.on('connection', function (socket) {
 				break;
 		}
 
-		/*// Send packet over serial
+		// Send packet over serial
 		console.log('Sending Packet. Contents:');
 		sp.write( packet );
 		for( i = 0; i < PACKET_SIZE; i++ ) {
 			console.log( packet[i] );
 		}
-		console.log('Packet Sent');*/
+		console.log('Packet Sent');
 	});
 });
