@@ -31,8 +31,8 @@ Web controlled robot
     * Go to the directory robot/robotweb/firmware and upload firmware.ino to your arduino mega
 6. Install uv4l driver via instructions at http://www.linux-projects.org/modules/sections/index.php?op=viewarticle&artid=14
     * Install the required packages
-       `sudo apt-get install uv4l uv4l-raspicam`
-       `sudo apt-get install uv4l-server`
+       `sudo apt-get install uv4l uv4l-raspicam`  
+       `sudo apt-get install uv4l-server`  
 
 ### Hardware Setup:
 1. Plug in RGB LED to Arduino
@@ -50,5 +50,5 @@ Web controlled robot
 1. Start server on raspberry pi:  
        `sudo node server.js <path_to_serial_port> (e.g. /dev/ttyACM0)`
 2. Start video stream  
-	   `uv4l --driver raspicam --auto-video_nr --width 640 --height 480 --encoding mjpeg --framerate 30 --quality 5 --server-option '--port=9000'`
+	   `uv4l --driver raspicam --auto-video_nr --width 640 --height 480 --encoding mjpeg --framerate 30 --quality 5 --server-option '--port=9000'`  
 3. Open up your web browser and go to the address of your raspberry pi!
