@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<title>Robot Control</title>
-	<meta charset="utf-8"/>
+  <title>Robot Control</title>
+  <meta charset="utf-8"/>
   <meta name="author" content="Ryker Dial"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
@@ -10,7 +10,9 @@
   <link rel="stylesheet" href="css/style.css"/>
 
   <!-- Include JQuery for interface -->
-	<script src="js/jquery.min.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="css/jquery-ui.min.css"/>
 
   <!-- Include Bootstrap -->
   <script src="js/bootstrap.min.js"></script>
@@ -20,8 +22,9 @@
   <script src="js/spectrum.js"></script>
   <link rel="stylesheet" href="css/spectrum.css"/>
 
-	<!-- Use websockets to send user commands to server -->
-	<script src="/socket.io/socket.io.js"></script>
+  <!-- Use websockets to send user commands to server -->
+  <script src="/socket.io/socket.io.js"></script>
+
 </head>
 
 <body>
@@ -32,7 +35,7 @@
 
     <section>
         <div class="row">
-          <div id="robot_control" class="col-md-6">  
+          <div id="robot_control" class="col-md-4">  
         <p align = "center">
           <br /><br /><br />
           Robot Control:<br /><br />
@@ -45,19 +48,20 @@
         </p>
       <br /><br /><br /><br />
         <p class="tab">
-        Robot Drive Power:<br />
-          <input type="number" id="robot_drive_power" min=0 max=63>
-          <button type="button" id="set_drive_power">Set</button> 
+          <p>
+            <label for="drive_power">Robot Drive Power:</label>
+            <input type="text" id="drive_power" readonly style="border:0; color:#f6931f; font-weight:bold;">
+          </p>
+          <div id="drive_power_slider"></div>
+          <button type="button" id="set_drive_power">Set</button>
         <br /><br />
         LED Control:<br /> 
           <input type='text' class="basic" />
           <button type="button" id="off">Off</button>
         </p>
       </div>
-      <div id="video" class="col-md-6">
-        <p align = "center">
-        <iframe id="video_iframe" src="" width="320" height="240"></iframe>
-        </p>
+      <div id="video" class="col-md-8">
+       <img id="video_stream" alt="Robot Stream" src=""</img>
       </div>
       <hr />
     </section>

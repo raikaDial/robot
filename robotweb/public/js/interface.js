@@ -3,7 +3,7 @@ $(document).ready(function() {
     // Using this method robot can only be connected to on
     // local network. 
     var ip = location.host;
-    document.getElementById('video_iframe').src = 'http://' + ip + ":8081"; // Sets iframe source to get video
+    document.getElementById('video_stream').src = 'http://' + ip + ":9000/stream/video.mjpeg"; // Sets img source to get video
     var socket = io.connect(ip); // Connects to server
     // Upon establishing a connection to the socket.io server...
     socket.on('robot connected', function (data) {
@@ -42,20 +42,34 @@ $(document).ready(function() {
     }).mouseup(function () {
         socket.emit('robot command', { command: 'stop' });
     });
+
+    //var robot_drive_power;
+    $(function() {
+        $( "#drive_power_slider" ).slider({
+            range: "min",
+            value: 14,
+            min: 0,
+            max: 63,
+            slide: function( event, ui ) {
+                $( "#drive_power" ).val( ui.value );
+            }
+        });
+        $( "#drive_power" ).val( $( "#drive_power_slider" ).slider( "value" ) );
+    });
+
     $('#set_drive_power').click(function () {
         console.log("Button Clicked");
-        var robot_drive_power = $('#robot_drive_power').val();
+        var robot_drive_power = $( "#drive_power_slider" ).slider( "value" );
 
         // For a Sabertooth motor controller using simplified serial,
         // each motor has 7 bits of resolution, giving both its
         // forward and backward movement a range of 63.
-        if( (robot_drive_power >= 0) && (robot_drive_power <= 63) ){
-            socket.emit('robot command', { 
-                command: 'set_power', 
-                power: robot_drive_power 
-            });
-        }
+        socket.emit('robot command', { 
+            command: 'set_power', 
+            power: robot_drive_power 
+        });
     });
+
 
     // Control LED Color
     $(".basic").spectrum({
