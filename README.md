@@ -30,7 +30,7 @@ Web controlled robot
 5. Upload the firmware on your arduino mega:
     * Go to the directory robot/robotweb/firmware and upload firmware.ino to your arduino mega
 6. Install uv4l driver via instructions at http://www.linux-projects.org/modules/sections/index.php?op=viewarticle&artid=14
-    * Install the required packages
+    * Install the required packages  
        `sudo apt-get install uv4l uv4l-raspicam`  
        `sudo apt-get install uv4l-server`  
 
