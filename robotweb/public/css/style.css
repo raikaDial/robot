@@ -1,6 +1,14 @@
 header {
-    background-color: #545454;
     color: #f6931f;
+    text-shadow: 0 0 5px #f66f1f, 0 0 10px #f66f1f,
+             0 0 20px #f66f1f, 0 0 30px #f66f1f,
+             0 0 40px #f66f1f;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background-color: #545454;
+    border-top: solid #545454 medium;
+    border-bottom: dotted #545454 thin;
+    /*color: #f6931f;*/
     font-family: Georgia, serif;
     text-align: center;
     padding: 5px;
@@ -18,6 +26,8 @@ section {
     font-family: Georgia, serif;
     background-color: #eeeeee;
     padding: 10px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
 .tab {

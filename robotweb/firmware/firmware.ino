@@ -6,11 +6,11 @@
 #define FORWARD 127
 #define RANGE 63
 
-// Servo used to steer the vehicle. Center is 90 degrees, full left is 0 degrees,
-// full right is 180 degrees
-#define LEFT 0
+// Servo used to steer the vehicle. Center is 90 degrees, full left is 150 degrees,
+// full right is 30 degrees
+#define LEFT 130
 #define CENTER 90
-#define RIGHT 180
+#define RIGHT 50
 
 // LED Pins
 #define RED_LED_PIN 8
@@ -18,10 +18,11 @@
 #define BLUE_LED_PIN 10
 
 // Steering Servo Pin
-#define STEERING_PIN 13
+#define STEERING_PIN 7
 
 #include <Servo.h>
 
+int servo_pos = 90;
 Servo steering;
 
 // Drive power for robot. Low by default.
@@ -35,7 +36,7 @@ void setup()
     Serial1.begin(9600);
     
     steering.attach( STEERING_PIN );
-    steering.write( CENTER );
+    steering.write( servo_pos );
     pinMode(RED_LED_PIN, OUTPUT);
     pinMode(BLUE_LED_PIN, OUTPUT);
     pinMode(GREEN_LED_PIN, OUTPUT);
@@ -59,13 +60,16 @@ void loop()
             Serial1.write( FORWARD - RANGE + drivePower );
             break;
           case 'l':
-            steering.write( LEFT );
+            //steering.write( LEFT );
+            servo_pos = LEFT;
             break;
           case 'c':
-            steering.write( CENTER );
+            //steering.write( CENTER );
+            servo_pos = CENTER;
             break;
           case 'r':
-            steering.write( RIGHT );
+            //steering.write( RIGHT );
+            servo_pos = RIGHT;
             break;
           case 'b':
             Serial1.write( BACKWARD + (RANGE + 1) - drivePower );
@@ -80,4 +84,5 @@ void loop()
     analogWrite(GREEN_LED_PIN, buff[2]);
     analogWrite(BLUE_LED_PIN, buff[3]);
   }
+  steering.write(servo_pos);
 }

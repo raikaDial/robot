@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="css/spectrum.css"/>
 
   <!-- Use websockets to send user commands to server -->
-  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/socket.io.js"></script>
 
 </head>
 
@@ -36,7 +36,7 @@
     <section>
         <div class="row">
           <div id="robot_control" class="col-md-4">  
-        <p align = "center">
+        <p style = "text-align: center; font-weight: bold">
           <br /><br /><br />
           Robot Control:<br /><br />
             <button type="button" id="forward">Forward</button><br />
@@ -61,7 +61,7 @@
         </p>
       </div>
       <div id="video" class="col-md-8">
-       <img id="video_stream" alt="Robot Stream" src=""</img>
+       <img id="video_stream" alt="Robot Video Stream" src=""</img>
       </div>
       <hr />
     </section>
