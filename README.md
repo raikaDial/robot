@@ -17,7 +17,7 @@ Web controlled robot
     * In raspi-config, expand filesystem, enable raspberry pi camera module, and change the memory split to 256/256.
     * Make sure your raspberry pi is up to date:  
 	`sudo apt-get update`  
-     	`sudo apt-get dist-upgrade`
+     	`sudo apt-get dist-upgrade`  
         `sudo rpi-update`
 2. Install Node.js. I ran into a number of issues installing node, but the following worked for me:  
 	`curl -sLS https://apt.adafruit.com/add | sudo bash`  
@@ -33,6 +33,12 @@ Web controlled robot
     * Install the required packages  
        `sudo apt-get install uv4l uv4l-raspicam`  
        `sudo apt-get install uv4l-server`  
+    * To start streaming mjpeg use the following command:  
+       `uv4l --driver raspicam --auto-video_nr --width 640 --height 480 --encoding mjpeg --framerate 25 --quality 5 --server-option '--port=9000'`  
+    * If you have a raspberry pi 2 you can stream with Webrtc, which will give better stream quality and latency. Install the webrtc extension for the streaming server:  
+       `sudo apt-get install uv4l-webrtc`  
+        * Start your webrtc stream:  
+       `uv4l --driver raspicam --auto-video_nr --server-option '--enable webrtc' --server-option '--enable-webrtc-video=1' --server-option '--enable-webrtc-audio=0' --server-option '--port=9000'`  
 
 ### Hardware Setup:
 1. Plug in RGB LED to Arduino
