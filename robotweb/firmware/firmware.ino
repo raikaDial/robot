@@ -8,9 +8,9 @@
 
 // Servo used to steer the vehicle. Center is 90 degrees, full left is 150 degrees,
 // full right is 30 degrees
-#define LEFT 130
+#define LEFT 50
 #define CENTER 90
-#define RIGHT 50
+#define RIGHT 130
 
 // LED Pins
 #define RED_LED_PIN 8

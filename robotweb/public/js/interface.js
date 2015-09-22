@@ -49,7 +49,7 @@ $(document).ready(function() {
             range: "min",
             value: 14,
             min: 0,
-            max: 63,
+            max: 22,
             slide: function( event, ui ) {
                 $( "#drive_power" ).val( ui.value );
             }
