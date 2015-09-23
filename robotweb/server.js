@@ -18,13 +18,16 @@ app.get('/', function (req, res) {
   	res.sendfile(__dirname + '/index.html');
 });
 
-var serialport = require('serialport'),// include the library
-   SerialPort = serialport.SerialPort,//, // make a local instance of it
-   // get port name from the command line:
-   portName = process.argv[2];
-
+var serialport = require('serialport'); // include the library
+var SerialPort = serialport.SerialPort; // make a local instance
+var portName = process.argv[2]; // get port name from the command line:
 var sp = new SerialPort(portName, {
-   	baudRate: 9600
+   	baudRate: 9600,
+   	// Arduino uses 8N1 format
+   	dataBits: 8,
+   	parity: 'none',
+   	stopBits: 1,
+   	flowControl: false
  });
 
 

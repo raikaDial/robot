@@ -47,7 +47,7 @@ $(document).ready(function() {
     $(function() {
         $( "#drive_power_slider" ).slider({
             range: "min",
-            value: 14,
+            value: 10,
             min: 0,
             max: 22,
             slide: function( event, ui ) {

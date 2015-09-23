@@ -6,8 +6,8 @@
 #define FORWARD 127
 #define RANGE 63
 
-// Servo used to steer the vehicle. Center is 90 degrees, full left is 150 degrees,
-// full right is 30 degrees
+// Servo used to steer the vehicle. Center is 50 degrees, full left is 50 degrees,
+// full right is 130 degrees. 
 #define LEFT 50
 #define CENTER 90
 #define RIGHT 130
@@ -51,7 +51,7 @@ void loop()
         Serial.readBytes( buff, 4 );
     }
   
-  if( buff[0] == 'r'){
+    if( buff[0] == 'r'){
     
         drivePower = buff[2];
         
@@ -78,11 +78,11 @@ void loop()
             Serial1.write( STOP );
             break;
         }
-  }
-  else if( buff[0] == 'l' ) {
-    analogWrite(RED_LED_PIN, buff[1]);
-    analogWrite(GREEN_LED_PIN, buff[2]);
-    analogWrite(BLUE_LED_PIN, buff[3]);
-  }
-  steering.write(servo_pos);
+    }
+    else if( buff[0] == 'l' ) {
+        analogWrite(RED_LED_PIN, buff[1]);
+        analogWrite(GREEN_LED_PIN, buff[2]);
+        analogWrite(BLUE_LED_PIN, buff[3]);
+    }
+    steering.write(servo_pos);
 }
