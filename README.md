@@ -38,7 +38,7 @@ Web controlled robot
     * If you have a raspberry pi 2 you can stream with Webrtc, which will give better stream quality and latency. Install the webrtc extension for the streaming server:  
        `sudo apt-get install uv4l-webrtc`  
         * Start your webrtc stream:  
-       `uv4l --driver raspicam --auto-video_nr --server-option '--enable webrtc' --server-option '--enable-webrtc-video=1' --server-option '--enable-webrtc-audio=0' --server-option '--port=9000'`  
+       `uv4l --driver raspicam --auto-video_nr --server-option '--enable-webrtc-audio=0' --server-option '--port=9000'`  
 
 ### Hardware Setup:
 1. Plug in RGB LED to Arduino
