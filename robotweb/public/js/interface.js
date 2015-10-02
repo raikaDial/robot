@@ -3,7 +3,6 @@ $(document).ready(function() {
     // Using this method robot can only be connected to on
     // local network. 
     var ip = location.host;
-    document.getElementById('video_stream').src = 'http://' + ip + ":9000/stream/video.mjpeg"; // Sets img source to get video
     var socket = io.connect(ip); // Connects to server
     // Upon establishing a connection to the socket.io server...
     socket.on('robot connected', function (data) {
@@ -13,30 +12,30 @@ $(document).ready(function() {
     });
 
     // These buttons control the movement of the robot
-    $('#forward').mousedown(function () {
+    $('#robot_forward').mousedown(function () {
         console.log("Button Pressed");
         socket.emit('robot command', { command: 'forward' });
     }).mouseup(function () {
         console.log("Button Released");
         socket.emit('robot command', { command: 'stop' });        
     });
-    $('#left').click(function () {
+    $('#robot_left').click(function () {
         console.log("Button Clicked");
         socket.emit('robot command', { command: 'left' });
     });
-    $('#center').click(function () {
+    $('#robot_center').click(function () {
         console.log("Button Clicked");
         socket.emit('robot command', { command: 'center' });
     });
-    $('#stop').click(function () {
+    $('#robot_stop').click(function () {
         console.log("Button Clicked");
         socket.emit('robot command', { command: 'stop' });
     });
-    $('#right').click(function () {
+    $('#robot_right').click(function () {
         console.log("Button Clicked");
         socket.emit('robot command', { command: 'right' });
     });
-    $('#backward').mousedown(function () {
+    $('#robot_backward').mousedown(function () {
         console.log("Button Pressed");
         socket.emit('robot command', { command: 'backward' });
     }).mouseup(function () {

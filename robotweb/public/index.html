@@ -25,6 +25,9 @@
   <!-- Use websockets to send user commands to server -->
   <script src="js/socket.io.js"></script>
 
+  <!--Webrtc-->
+  <script src="js/webrtc.js"></script>
+
 </head>
 
 <body>
@@ -39,12 +42,12 @@
         <p style = "text-align: center; font-weight: bold">
           <br /><br /><br />
           Robot Control:<br /><br />
-            <button type="button" id="forward">Forward</button><br />
-            <button type="button" id="left">Left</button>
-            <button type="button" id="center">Center</button>
-            <button type="button" id="right">Right</button><br />
-            <button type="button" id="backward">Backward</button><br />
-            <button type="button" id="stop">Stop</button>
+            <button type="button" id="robot_forward">Forward</button><br />
+            <button type="button" id="robot_left">Left</button>
+            <button type="button" id="robot_center">Center</button>
+            <button type="button" id="robot_right">Right</button><br />
+            <button type="button" id="robot_backward">Backward</button><br />
+            <button type="button" id="robot_stop">Stop</button>
         </p>
       <br /><br /><br /><br />
         <p class="tab">
@@ -59,11 +62,25 @@
           <input type='text' class="basic" />
           <button type="button" id="off">Off</button>
         </p>
+
+      <div class="col-md-8">
+        <div id="container">
+              <div id="remote">
+                  <video id="remote-video" autoplay="" style="border:1px solid" width="640" height="480">
+                      Your browser does not support the video tag.
+                  </video>
+              </div>
+          </div>
+
+        <div id="controls">
+              Signalling Server Address: <input required="" id="signalling_server" value="" title="<host>:<port>, default address is autodetected" type="text"><br>
+              <input id="twoway_audio" name="twoway_audio" value="0" title="stream from a local audio input source (e.g. microphone) to the remote peer" type="checkbox">enable two-way audio<br>
+              <button id="start" onclick="start();">Start</button>
+              <button disabled="" id="stop" onclick="stop();">Stop</button>
+              <button id="mute" onclick="mute();">Mute/Unmute</button>
+              <button id="fullscreen" onclick="fullscreen();">Fullscreen</button>
+          </div>
       </div>
-      <div id="video" class="col-md-8">
-       <img id="video_stream" alt="Robot Video Stream" src=""</img>
-      </div>
-      <hr />
     </section>
     <script src="js/interface.js"></script>
   </div>
