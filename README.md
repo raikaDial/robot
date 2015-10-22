@@ -46,7 +46,7 @@ Web controlled robot
 2. Plug in wifi dongle, arduino mega, camera module, and battery pack into your raspberry pi.
 3. Setup Sabertooth:
     * Connect Sabertooth 0V to Arduino GND and Sabertooth S1 to Arduino TX1
-    * Connect the steering motor to M1A and M1B and the drive motor to M2A and M2B
+    * Connect the drive motor to M1A and M1B
     * Configure DIP switches. Using sabertooth DIP switch wizard:  
           `1: UP  2: DOWN  3: DOWN  4: DOWN  5: UP  6: UP`
     * Hook up your LiPO battery to B+ and B-
