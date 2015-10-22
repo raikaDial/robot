@@ -14,7 +14,7 @@ Web controlled robot
 	
 ### Software Setup:
 1. Install raspbian on raspberry pi. 
-    * In raspi-config expand filesystem, enable raspberry pi camera module, and change the memory split to give the GPU 256 Mb of memory.
+    * In raspi-config expand filesystem, enable raspberry pi camera module, and change the memory split to give the GPU 256 MB of memory.
     * Make sure your raspberry pi is up to date:  
 	`sudo apt-get update`  
      	`sudo apt-get dist-upgrade`  
