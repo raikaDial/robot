@@ -43,8 +43,9 @@ Web controlled robot
 1. Plug in RGB LED to Arduino
     * Solder resistors to the cathodes of your RGB LED, then plug in the leads like so:  
           `Red Lead: Pin 8  Green Lead: Pin 9  Blue Lead: Pin 10  Anode: GND`
-2. Plug in wifi dongle, arduino mega, camera module, and battery pack into your raspberry pi.
-3. Setup Sabertooth:
+2. Plug in servo signal wire to pin 7 of the Arduino.  
+3. Plug in wifi dongle, arduino mega, camera module, and battery pack into your raspberry pi.
+4. Setup Sabertooth:
     * Connect Sabertooth 0V to Arduino GND and Sabertooth S1 to Arduino TX1
     * Connect the drive motor to M1A and M1B
     * Configure DIP switches. Using sabertooth DIP switch wizard:  
