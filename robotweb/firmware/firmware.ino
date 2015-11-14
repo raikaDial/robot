@@ -10,7 +10,7 @@
 // full right is 130 degrees. 
 #define LEFT 50
 #define CENTER 90
-#define RIGHT 130
+#define RIGHT 130+10 // Extra 10 degrees compensation because steering is slightly off center
 
 // LED Pins
 #define RED_LED_PIN 8

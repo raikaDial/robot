@@ -218,7 +218,7 @@ function mute() {
     remoteVideo.muted = !remoteVideo.muted;
 }
 
-function fullscreen() {
+/*function fullscreen() {
     var remoteVideo = document.getElementById("remote-video");
     if(remoteVideo.requestFullScreen){
         remoteVideo.requestFullScreen();
@@ -227,7 +227,7 @@ function fullscreen() {
     } else if(remoteVideo.mozRequestFullScreen){
         remoteVideo.mozRequestFullScreen();
 }
-}
+}*/
 
 window.onbeforeunload = function() {
     if (ws) {
